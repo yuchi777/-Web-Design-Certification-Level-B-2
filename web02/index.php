@@ -30,7 +30,7 @@ include './base.php';
 		<div id="title">
 			<!--改日期 date()函式 m:數字表示的月份,含0 / d:月分中的第幾天,含0 / l:完整星期幾英文 -->
 			<!-- 00 月 00 號 Tuesday  -->
-			<?= date("m 月 d 號 l"); ?> | 今日瀏覽: <?= $Total->find(['date'=>date("Y-m-d")])['total']; ?> | 累積瀏覽: 36 </div>
+			<?= date("m 月 d 號 l"); ?> | 今日瀏覽: <?= $Total->find(['date'=>date("Y-m-d")])['total']; ?> | 累積瀏覽: <?= $Total->sum('total'); ?> </div>
 		<div id="title2">
 
 		</div>

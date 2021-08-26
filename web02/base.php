@@ -166,6 +166,19 @@ class DB{
         // echo $sql."<br>";
         return $this->pdo->exec($sql);
     }
+
+
+
+    /******************************************************************************************/
+    // 第二題的SUM function //欄位加總的計算
+    public function sum($col){
+        $sql="select sum(`$col`) from $this->table";
+        //抓取一個值fetchColumn
+        return $this->pdo->query($sql)->fetchColumn();
+    }
+
+
+
 }
 
 
@@ -173,6 +186,9 @@ class DB{
     function to($url){
         header("location:".$url);
     }
+
+
+
 
 
 
