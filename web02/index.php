@@ -30,9 +30,15 @@ include './base.php';
 		<div id="title">
 			<!--改日期 date()函式 m:數字表示的月份,含0 / d:月分中的第幾天,含0 / l:完整星期幾英文 -->
 			<!-- 00 月 00 號 Tuesday  -->
-			<?= date("m 月 d 號 l"); ?> | 今日瀏覽: <?= $Total->find(['date'=>date("Y-m-d")])['total']; ?> | 累積瀏覽: <?= $Total->sum('total'); ?> </div>
+			<?= date("m 月 d 號 l"); ?> | 今日瀏覽: <?= $Total->find(['date' => date("Y-m-d")])['total']; ?> | 累積瀏覽: <?= $Total->sum('total'); ?>
+			<!-- 回首頁連結 -->
+			<a href="index.php"  style="float: right;">回首頁</a>
+		</div>
 		<div id="title2">
-			<img src="./icon/02B01.jpg" alt="">
+			<!-- 加入標題圖片和替代文字和回首頁連結 -->
+			<a href="index.php">
+				<img src="./icon/02B01.jpg" alt="" title="健康促進網-回首頁">
+			</a>
 		</div>
 		<div id="mm">
 			<div class="hal" id="lef">
