@@ -57,8 +57,23 @@ include './base.php';
 					<span style="width:18%; display:inline-block;">
 						<a href="?do=login">會員登入</a>
 					</span>
-					<div class="">
+
+					<!-- 內容區 -->
+					<div class="content">
+						<?php
+							$do = (isset($_GET['do']) ? $_GET['do'] : 'home' );
+							$file = 'frontend/' . $do . '.php';
+							if(file_exists($file)){
+								include $file;
+							}else{
+								include 'frontend/home.php';
+							}
+						
+						
+						?>
+
 					</div>
+
 				</div>
 			</div>
 		</div>
