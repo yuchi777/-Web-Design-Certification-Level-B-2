@@ -1,6 +1,8 @@
 <?php
 include_once '../base.php';
 
+// echo $Mem->save($_POST);//精簡
+
 echo $Mem->save([
     'acc'=>$_POST['acc'],
     'pw'=>$_POST['pw'],
