@@ -1,11 +1,7 @@
 <fieldset>
-    <legend>
-        會員註冊
-    </legend>
+    <legend>會員註冊</legend>
     <div style="color:red">*請設定您要註冊的帳號及密碼(最長12個字元)</div>
-    <!-- table>tr*5>td+td:input:text  -->
-
-    <form action="">
+    <form>
     <table>
         <tr>
             <td class="clo">Step1:登入帳號</td>
@@ -26,28 +22,44 @@
         <tr>
             <td>
                 <input type="button" value="註冊" onclick="reg()">
-                <!-- form表單內input:reset會有清除功能 -->
                 <input type="reset" value="清除">
             </td>
-            <td>
-            </td>
+            <td></td>
         </tr>
     </table>
     </form>
-
 </fieldset>
-
 <script>
     function reg(){
         let acc=$("#acc").val();
         let pw=$("#pw").val();
         let pw2=$("#pw2").val();
         let email=$("#email").val();
-
-        if( acc=="" || pw=="" || pw2=="" || email==""){
-            alert('不可空白');
+        if(acc=="" || pw=="" || pw2=="" || email==""){
+            alert("不可空白");
+        }else if(pw!=pw2){
+            alert("密碼錯誤")
         }else{
-            
+            $.get('api/chk_acc.php',{acc},(res)=>{
+                console.log('回傳res...');
+                console.log(res);
+
+                if(res==1){
+                    alert('帳號重複')
+
+                }else{
+                    $.post('api/save_reg.php',{acc,pw,email},(chk)=>{
+                        console.log('回傳chk...')
+                        console.log(chk)
+                        
+                        if(chk==1){
+                            alert("註冊完成,歡迎加入")
+                        }else{
+                            alert("註冊失敗,請洽管理員")
+                        }
+                    })
+                }
+            })
         }
     }
 </script>

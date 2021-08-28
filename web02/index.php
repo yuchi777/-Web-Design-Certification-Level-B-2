@@ -14,6 +14,7 @@ include './base.php';
 	<link href="./css/css.css" rel="stylesheet" type="text/css">
 	<script src="./js/jquery-1.9.1.min.js"></script>
 	<script src="./js/js.js"></script>
+	<link rel="shortcut icon" href="#">
 </head>
 
 <body>
@@ -58,7 +59,7 @@ include './base.php';
 						<a href="?do=login">會員登入</a>
 					</span>
 
-					<!-- 內容區 -->
+					<!-- 內容區 ------------------------------------------------------>
 					<div class="content">
 						<?php
 							$do = (isset($_GET['do']) ? $_GET['do'] : 'home' );
