@@ -7,6 +7,7 @@ $pw=$_GET['pw'];
 $chk=$Mem->count(['acc'=>$acc,'pw'=>$pw]);
 if($chk>0){
     echo '1';
+    $_SESSION['login']=$_GET['acc'];
 } 
 
 
