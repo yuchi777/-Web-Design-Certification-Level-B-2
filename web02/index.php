@@ -57,7 +57,7 @@ include './base.php';
 					</span>
 					<span style="width:18%; display:inline-block;">
 
-
+					<!-- 判斷登入狀態 -->
 					<?php
 						if(isset($_SESSION['login'])){	
 								

@@ -55,7 +55,7 @@ include './base.php';
 					</span>
 					<span style="width:18%; display:inline-block;">
 
-
+					<!-- 判斷登入狀態 -->
 					<?php
 						if(isset($_SESSION['login'])){	
 								
@@ -83,7 +83,21 @@ include './base.php';
 
 
 					</span>
-					<div class="">
+					<!-- 內容區 ------------------------------------------------------>
+					<div class="content">
+						<?php
+							$do = (isset($_GET['do']) ? $_GET['do'] : 'home' );
+							$file = 'backend/' . $do . '.php';
+							if(file_exists($file)){
+								include $file;
+							}else{
+								include 'backend/home.php';
+							}
+						
+						
+						?>
+
+					</div>
 					</div>
 				</div>
 			</div>
