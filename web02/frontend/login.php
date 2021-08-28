@@ -12,12 +12,12 @@
         <tr>
             <td class='clo'>密碼:</td>
             <td>
-                <input type="password" name="pwd" id="pwd">
+                <input type="password" name="pw" id="pw">
             </td>
         </tr>
         <tr>
             <td>
-                <input type="button" value="登入">
+                <input type="button" value="登入" onclick="login()">
                 <input type="reset" value="清除">
             </td>
             <td>
@@ -27,3 +27,34 @@
         </tr>
     </table>
 </fieldset>
+
+<script>
+    function login(){
+        let acc = $('#acc').val();
+        let pw = $('#pw').val();
+
+        // 檢查帳號
+        $.get('api/chk_acc.php',{acc},(chkAcc)=>{
+            console.log('chkAcc');
+            console.log(chkAcc);
+            if(chkAcc!= 1 ){
+                alert('查無帳號');
+            }else{
+                // 檢查密碼
+                $.get('api/chk_pw.php',{acc,pw},(chkPw)=>{
+                    console.log('chkPw');
+                    console.log(chkPw);
+                    if(chkPw!= 1 ){
+                        alert('密碼錯誤')
+                    }else{
+                        if(acc=='admin'){
+                            location.href="backend.php";
+                        }else{
+                            location.href="index.php";
+                        }
+                    }
+                })
+            }
+        })
+    }
+</script>

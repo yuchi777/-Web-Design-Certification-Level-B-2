@@ -3,7 +3,8 @@
 
 
 $acc=$_GET['acc'];
-$chk=$Mem->count(['acc'=>$acc]);
+$pw=$_GET['pw'];
+$chk=$Mem->count(['acc'=>$acc,'pw'=>$pw]);
 if($chk>0){
     echo '1';
 } 
