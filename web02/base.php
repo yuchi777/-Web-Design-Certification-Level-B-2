@@ -195,6 +195,7 @@ class DB{
     // 建立物件導向(資料表)///////////////////////////////////////////////
     $Total = new DB("total");
     $Mem = new DB("mem");
+    $News = new DB("news");
 
 
 
