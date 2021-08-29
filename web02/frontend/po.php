@@ -16,30 +16,63 @@
 
 
 <fieldset style="width: 70%;display:inline-block">
-    <legend>文章列表</legend>
-    <div id="titles">
+    <legend id="ch">文章列表</legend>
+    <div id="titles"> </div>
+    <div id="Post"> </div>
 
 
 
-    </div>
 </fieldset>
 
 <script>
-$('.type').on("click", function(){
-    // 抓文字內容
-    let type=$(this).text();
+// $('.type').on("click", function(){
+//     // 抓文字內容
+//     let type=$(this).text();
 
-    //放到導覽區
-    $('#navType').html(type);
+//     //放到導覽區
+//     $('#navType').html(type);
 
-    //AJAX撈後端資料
-    let typeThis = $(this).attr('id').replace('t',''); //取id=1,2,3,4..
+//     //AJAX撈後端資料
+//     let typeThis = $(this).attr('id').replace('t',''); //取id=1,2,3,4..
 
-    $.get('api/get_list.php', {'type': typeThis}, function(re){
-        $("#titles").html(re);
-    })
+//     $.get('api/get_list.php', {'type': typeThis}, function(re){
+//         $("#titles").html(re);
+//     })
+// })
+
+
+
+
+// 先載入頁面
+getList(1);
+
+$(".type").on("click", function(){
+
+    type = $(this).attr('id').replace("t","");
+    getList(type);
+
 })
 
+function getList(type){
+    $('#navType').html($('#t'+type).text());
+    $.get('api/get_list.php', {'type': type}, function(re){
+        $("#Post").html("");
+        $("#titles").html(re);
+
+        $("#ch").html("文章列表");
+    })
+
+}
+
+
+function getNews(id){
+    $.get("api/get_post.php", {id}, (re)=>{
+        $("#Post").html(re);
+        $("#titles").html("");
+
+        $("#ch").html("文章內容");
+    })
+}
 
 
 
