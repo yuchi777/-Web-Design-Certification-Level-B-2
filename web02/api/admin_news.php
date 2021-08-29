@@ -4,7 +4,7 @@ include '../base.php';
 print_r($_POST['id']);
 
 
-foreach ($_POST['id'] as $value => $id) {
+foreach ($_POST['id'] as  $id) {
 
     // 判斷del 
     if(isset($_POST['del']) && in_array($id,$_POST['del'])){

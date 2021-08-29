@@ -196,6 +196,7 @@ class DB{
     $Total = new DB("total");
     $Mem = new DB("mem");
     $News = new DB("news");
+    $Que = new DB("que");
 
 
 
