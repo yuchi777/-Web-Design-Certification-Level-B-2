@@ -15,15 +15,15 @@ include './base.php';
 	<script src="./js/jquery-1.9.1.min.js"></script>
 	<script src="./js/js.js"></script>
 	<link rel="shortcut icon" href="#">
+	<style>
+		
+	</style>
 </head>
 
 <body>
 
 	<!-- 彈出視窗 -->
-	<div id="alerr" style="background:rgba(51,51,51,0.8); color:#FFF; min-height:100px; width:300px; position:fixed; display:none; z-index:9999; overflow:auto;">
-		<pre id="ssaa"></pre>
-	</div>
-
+	
 	<!-- iframe刪除改用AJAX -->
 	<!-- <iframe name="back" style="display:none;"></iframe> -->
 
@@ -33,7 +33,7 @@ include './base.php';
 			<!-- 00 月 00 號 Tuesday  -->
 			<?= date("m 月 d 號 l"); ?> | 今日瀏覽: <?= $Total->find(['date' => date("Y-m-d")])['total']; ?> | 累積瀏覽: <?= $Total->sum('total'); ?>
 			<!-- 回首頁連結 -->
-			<a href="index.php"  style="float: right;">回首頁</a>
+			<a href="index.php" style="float: right;">回首頁</a>
 		</div>
 		<div id="title2">
 			<!-- 加入標題圖片和替代文字和回首頁連結 -->
@@ -57,46 +57,46 @@ include './base.php';
 					</span>
 					<span style="width:18%; display:inline-block;">
 
-					<!-- 判斷登入狀態 -->
-					<?php
-						if(isset($_SESSION['login'])){	
-								
-								if($_SESSION['login']=='admin'){
-					?>	
+						<!-- 判斷登入狀態 -->
+						<?php
+						if (isset($_SESSION['login'])) {
+
+							if ($_SESSION['login'] == 'admin') {
+						?>
 								歡迎，<?= $_SESSION['login']; ?><br>
-								<a href="backend.php">管理</a>|<a href="frontend/logout.php">登出</a>	
+								<a href="backend.php">管理</a>|<a href="frontend/logout.php">登出</a>
 							<?php
-								}else{
+							} else {
 							?>
 								歡迎，<?= $_SESSION['login']; ?>
-								<a href="frontend/logout.php">登出</a>	
+								<a href="frontend/logout.php">登出</a>
 							<?php
-								}
+							}
 							?>
 
-					<?php
-						}else{
-					?>
-						<a href="?do=login">會員登入</a>
-					<?php
+						<?php
+						} else {
+						?>
+							<a href="?do=login">會員登入</a>
+						<?php
 						}
-					?>
+						?>
 
-					
+
 					</span>
 
 					<!-- 內容區 ------------------------------------------------------>
 					<div class="content">
 						<?php
-							$do = (isset($_GET['do']) ? $_GET['do'] : 'home' );
-							$file = 'frontend/' . $do . '.php';
-							if(file_exists($file)){
-								include $file;
-							}else{
-								include 'frontend/home.php';
-							}
-						
-						
+						$do = (isset($_GET['do']) ? $_GET['do'] : 'home');
+						$file = 'frontend/' . $do . '.php';
+						if (file_exists($file)) {
+							include $file;
+						} else {
+							include 'frontend/home.php';
+						}
+
+
 						?>
 
 					</div>
