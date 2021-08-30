@@ -14,5 +14,6 @@ $parent['vote']++;
 $Que->save($opt);
 $Que->save($parent);
 
-to("../index.php?do=result");
+to("../index.php?do=result&id=".$parent['id']);
+
 ?>
