@@ -22,4 +22,7 @@ function good(type,news,acc)
 			$("#good"+news).text("讚").attr("onclick","good('1','"+news+"','"+acc+"')")
 		}
 	})
+
+	// *******************************************************************************
+	// location.reload();
 }

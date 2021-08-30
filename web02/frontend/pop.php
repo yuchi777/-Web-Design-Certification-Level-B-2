@@ -3,42 +3,66 @@
 </div>
 
 
-<table> 
+<table>
     <tr>
         <td width="30%">標題</td>
         <td>內容</td>
         <td>人氣</td>
     </tr>
 
-<?php
-// 分頁
-// 總筆數
-$all = $News->count(['sh'=>1]);
-// 幾筆為一頁
-$div = 5;
-// 分幾頁,無條件進位
-$pages = ceil($all/$div);
-// 現在頁數
-$now = (isset($_GET['p']))?$_GET['p']:1;
-//開始
-$start = ($now-1)*$div;
+    <?php
+    // 分頁
+    // 總筆數
+    $all = $News->count(['sh' => 1]);
+    // 幾筆為一頁
+    $div = 5;
+    // 分幾頁,無條件進位
+    $pages = ceil($all / $div);
+    // 現在頁數
+    $now = (isset($_GET['p'])) ? $_GET['p'] : 1;
+    //開始
+    $start = ($now - 1) * $div;
 
-// 全部有顯示的資料
-$news = $News->all(['sh'=>1], "order by `pop` desc limit $start, $div");
-foreach ($news as $n) {
+    // 全部有顯示的資料 //增加排序
+    $news = $News->all(['sh' => 1], "order by `pop` desc limit $start, $div");
+    foreach ($news as $n) {
 
-?>
-    <tr>
-        <td class="clo"><?= $n['title']; ?></td>
-        <!-- 字數控制 -->
-        <td><?= mb_substr($n['news'], 0, 20); ?>...</td>
-        <td></td>
-        <td></td>
-    </tr>
+    ?>
+        <tr>
+            <td class="clo"><?= $n['title']; ?></td>
+            <!-- 字數控制 -->
+            <td><?= mb_substr($n['news'], 0, 20); ?>...</td>
+            <td>
+                <!-- 人氣 / 讚 / 收回讚 -->
+                <?php
 
-<?php
-}
-?>
+                echo "<span id='vie{$n['id']}'>" . $n['pop'] . "</span>";
+                echo "個人說";
+                echo "<img src='icon/02B03.jpg' style='width:25px' >";
+
+
+                if (isset($_SESSION['login'])) {
+                
+
+                    // 判斷資料庫有無資料
+                    $chk = $Log->count(['acc' => $_SESSION['login'], 'news' => $n['id']]);
+                    if ($chk > 0) {
+                        echo "<a id='good{$n['id']}' href='#' onclick=good(2,{$n['id']},&#39;{$_SESSION['login']}&#39;)>收回讚</a>";
+                    } else {
+                        echo "<a id='good{$n['id']}' href='#' onclick=good(1,{$n['id']},&#39;{$_SESSION['login']}&#39;)>讚</a>";
+                    }
+
+                    
+                }
+
+                ?>
+            </td>
+
+        </tr>
+
+    <?php
+    }
+    ?>
 
 </table>
 
@@ -46,26 +70,26 @@ foreach ($news as $n) {
 <div>
     <?php
 
-    if($now-1>0){
-        echo "<a href='index.php?do=pop&p=".($now-1)."' style='font-size':20px>";
+    if ($now - 1 > 0) {
+        echo "<a href='index.php?do=pop&p=" . ($now - 1) . "' style='font-size':20px>";
         echo " < ";
         echo "</a>";
     }
-    
-    for($i=1; $i<=$pages; $i++){
-        $fontsize=($now==$i)?'26px':'18px';
+
+    for ($i = 1; $i <= $pages; $i++) {
+        $fontsize = ($now == $i) ? '26px' : '18px';
         echo "<a href='index.php?do=pop&p=$i' style='font-size:$fontsize'>";
         echo "$i";
         echo "</a>";
     }
 
-    if($now+1<=$pages){
-        echo "<a href='index.php?do=pop&p=".($now+1)."' style='font-size':20px>";
+    if ($now + 1 <= $pages) {
+        echo "<a href='index.php?do=pop&p=" . ($now + 1) . "' style='font-size':20px>";
         echo " > ";
         echo "</a>";
     }
-    
-    
-    
+
+
+
     ?>
 </div>

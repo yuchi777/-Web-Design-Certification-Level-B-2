@@ -46,8 +46,12 @@ foreach ($news as $n) {
             <div class="newsAll"><?= nl2br($n['news']);?></div>
         </td>
 
+
+        
         <!-- 人氣 / 讚 / 收回讚 -->
         <?php
+                
+            
         
         if(isset($_SESSION['login'])){
             echo "<td>";
@@ -64,6 +68,7 @@ foreach ($news as $n) {
         }
         
         ?>
+        
         
     </tr>
 
