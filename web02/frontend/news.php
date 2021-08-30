@@ -2,11 +2,20 @@
     目前位置: 首頁 > 最新文章區 >
 </div>
 
+<style>
+    .newsAll{
+        display: none;
+    }
+</style>
+
 <table> 
     <tr>
         <td width="30%">標題</td>
         <td>內容</td>
-        <td>人氣</td>
+        <?=
+        (isset($_SESSION['login']))?"<td>人氣</td>":"";
+        ?>
+        
     </tr>
 
 <?php
@@ -28,11 +37,34 @@ foreach ($news as $n) {
 
 ?>
     <tr>
-        <td class="clo"><?= $n['title']; ?></td>
-        <!-- 字數控制 -->
-        <td><?= mb_substr($n['title'], 0, 20); ?>...</td>
-        <td></td>
-        <td></td>
+        <!-- 標題 -->
+        <td class="clo newsHeader"><?= $n['title']; ?></td>
+
+        <!-- 內容 / 字數控制 -->
+        <td>
+            <div class="newsTitle"><?= mb_substr($n['news'], 0, 20); ?>...</div>
+            <div class="newsAll"><?= nl2br($n['news']);?></div>
+        </td>
+
+        <!-- 人氣 / 讚 / 收回讚 -->
+        <?php
+        
+        if(isset($_SESSION['login'])){
+            echo "<td>";
+
+            // 判斷資料庫有無資料
+            $chk = $Log->count(['acc'=>$_SESSION['login'], 'news'=>$n['id']]);
+            if($chk>0){
+                echo "<a id='good{$n['id']}' href='#' onclick=good(2,{$n['id']},&#39;{$_SESSION['login']}&#39;)>收回讚</a>";
+            }else{
+                echo "<a id='good{$n['id']}' href='#' onclick=good(1,{$n['id']},&#39;{$_SESSION['login']}&#39;)>讚</a>";
+            }
+
+            echo "</td>";
+        }
+        
+        ?>
+        
     </tr>
 
 <?php
@@ -67,3 +99,16 @@ foreach ($news as $n) {
     
     ?>
 </div>
+
+
+<script>
+    $(".newsAll, .newsTitle").on("click",function(){
+        $(this).toggle();
+        $(this).siblings().toggle();
+        
+    })
+    $(".newsHeader").on("click",function(){
+        $(this).next().children(".newsAll, .newsTitle").toggle();
+        
+    })
+</script>

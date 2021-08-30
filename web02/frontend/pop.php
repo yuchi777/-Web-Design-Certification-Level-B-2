@@ -31,7 +31,7 @@ foreach ($news as $n) {
     <tr>
         <td class="clo"><?= $n['title']; ?></td>
         <!-- 字數控制 -->
-        <td><?= mb_substr($n['title'], 0, 20); ?>...</td>
+        <td><?= mb_substr($n['news'], 0, 20); ?>...</td>
         <td></td>
         <td></td>
     </tr>

@@ -197,6 +197,7 @@ class DB{
     $Mem = new DB("mem");
     $News = new DB("news");
     $Que = new DB("que");
+    $Log = new DB("log");
 
 
 
